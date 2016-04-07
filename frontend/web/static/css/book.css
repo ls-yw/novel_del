@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+.search-box{width:550px;margin:0 auto;margin-top:200px;}
+
+.list_search{height:55px;border-bottom: 1px solid #ebebeb;position: fixed;z-index: 301;margin: 0;padding: 0;width:100%;}
+.list_search .logo{float: left;margin: 7px 0 0;}
+.list_search #form{clear: none;float: left;margin: 11px 0 0 10px;}
+.list_search #form input{width: 500px;}
+.search_content{padding-top:55px;margin-right:0;}
+.search_content .search_result{margin-left:100px;}
+.search_content .search_result .list-group-item{border:none;}
+.search_content .search_result h4{font-weight: normal;}
+.search_content .search_result h4 a{color:#00c;text-decoration:underline;}
+.search_content .search_result .baseinfo{line-height:30px;height:30px;}
+.search_content .search_result .baseinfo .novelinfo{color: #666666;font-weight: normal;}
+
+.bookinfo{padding-top:50px;}
+.bookinfo h1{text-align:center;}
+.bookinfo .bookbase{line-height:30px;height:30px;text-align:center;}
+.bookinfo .bookbase strong{color: #666666;font-weight: normal;}
+.chapter{margin:20px 0;}
+.chapter .chapterlink{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;line-height:30px;height:30px;}
+.chapter .chapterlink a:visited{color:#666}
+
+.content{margin:20px 0;}
+.nextchapter{line-height:30px;height:30px;text-align:center;}
+
+
+/* 加载中 */
+.spinner {
+  width: 120px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+  position: fixed;
+  top:45%;
+  left:45%;
+  z-index: 101;
+}
+.spinner p{display: inline-block;line-height:60px;margin:0 3px;padding:0;float:left;font-size:16px;color:#008000;}
+.spinner > div{
+  background-color: #67CF22;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  margin:0 3px;
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+  float:left;
+}
+ 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+ 
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+.bg{background:#fff;position: fixed;top:0;width:100%;height:100%;z-index: 100;filter:alpha(opacity=30);-moz-opacity:0.3;opacity:0.3;}
+
+/*.footer{position:absolute;bottom:0px;width:100%;}*/
