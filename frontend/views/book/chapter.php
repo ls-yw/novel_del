@@ -1,5 +1,8 @@
 <?php
 use yii\helpers\Url;
+$this->title = $book->name;
+$this->registerMetaTag(['name' => 'keywrods', 'content' => $book->name.','.$book->author], 'keywrods');
+$this->registerMetaTag(['name' => 'description', 'content' => $book->description], 'description');
 ?>
 <div class="row">
     <div class="bookinfo">

@@ -19,6 +19,7 @@ $(function(){
 		loadBox();
 		getChapter();
 	}
+	$('.auhe').height($(window).height()*0.34);
 });
 
 function getArticle(u){

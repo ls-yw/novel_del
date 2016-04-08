@@ -13,7 +13,7 @@ use yii\helpers\Url;
 class BookController extends Controller{
     
     public function actionIndex(){
-        return $this->render('index');
+        return $this->renderPartial('index');
     }
     
     /**
@@ -35,7 +35,9 @@ class BookController extends Controller{
                   ->limit($pages->limit)
                   ->all();
         
-        return $this->renderPartial('search', ['models'=>$models,'pages'=>$pages]);
+        $hosts = $this->getHosts();
+        
+        return $this->renderPartial('search', ['models'=>$models,'pages'=>$pages,'wd'=>$wd, 'hosts'=>$hosts]);
     }
     
     /**
@@ -290,6 +292,21 @@ class BookController extends Controller{
             $new_links = Helper::pregLinks($v,$regular);
         }
         return $new_links;
+    }
+    
+    /**
+     * 获取采集域名列表
+     * @return Ambigous <multitype:, unknown>
+     */
+    public function getHosts(){
+        $arr = array();
+        $domains = Domain::find()->asArray()->All();
+        
+        foreach ($domains as $v){
+            $arr[$v['id']]['name']   = $v['name'];
+            $arr[$v['id']]['domain'] = $v['domain'];
+        }
+        return $arr;
     }
     
     public function actionError(){

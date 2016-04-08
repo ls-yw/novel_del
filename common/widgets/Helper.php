@@ -131,4 +131,31 @@ class Helper
 
         return $expandedLinks;
     }
+    
+    /**
+     * 给结果按照关键字加em标签
+     * @param unknown $str
+     * @param unknown $keyword
+     * @return mixed
+     */
+    public static function getRedKeyWord($str, $keyword){
+        $ks = explode(' ',$keyword);
+        foreach($ks as $k)
+        {
+            $k = trim($k);
+            if($k=='')
+            {
+                continue;
+            }
+            if(ord($k[0])>0x80 && strlen($k)<2)
+            {
+                continue;
+            }
+            // 这里不区分大小写进行关键词替换
+            $str = str_ireplace($k, "<em>$k</em>", $str);
+            // 速度更快,效率更高
+            //$fstr = str_replace($k, "<font color='red'>$k</font>", $fstr);
+        }
+        return $str;
+    }
 }
