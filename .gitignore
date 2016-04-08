@@ -16,6 +16,11 @@ nbproject
 Thumbs.db
 
 
+yii
+yii.bat
+init
+init.bat
+
 
 # composer itself is not needed
 composer.phar
@@ -33,3 +38,5 @@ console/
 environments/
 tests/
 requirements.php
+*.ico
+logo.png
