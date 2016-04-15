@@ -26,7 +26,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'book/error',
         ],
     ],
     'params' => $params,
