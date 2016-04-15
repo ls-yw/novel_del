@@ -36,7 +36,7 @@ function getArticle(u){
 		//data:{u:u,_csrf:$('#_csrf').val()},
 		data:{'u':u},
 		dataType:'json',
-		timeout:10000,
+		timeout:20000,
 		type:'GET',
 		error:function(XMLHttpRequest, textStatus, errorThrown){
 			loadBox();
