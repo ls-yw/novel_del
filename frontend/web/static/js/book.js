@@ -20,6 +20,14 @@ $(function(){
 		getChapter();
 	}
 	$('.auhe').height($(window).height()*0.34);
+	
+	$(document).keyup(function(a){
+		if(a.keyCode == 37){
+			$('#prev').click();
+		}else if(a.keyCode == 39){
+			$('#next').click();
+		}
+	});
 });
 
 function getArticle(u){

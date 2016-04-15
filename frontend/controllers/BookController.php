@@ -236,10 +236,10 @@ class BookController extends Controller{
     public function pagingHtml($paging){
         $html = '';
         if($paging[2][0] == '上一章' || $paging[2][0] == '下一章'):
-            $html .= '<div class="col-md-6 col-sm-6 col-xs-6"><a href="javascript:void(0);" class="getArticle" data-url="';
+            $html .= '<div class="col-md-6 col-sm-6 col-xs-6"><a href="javascript:void(0);" class="getArticle" id="prev" data-url="';
             if(isset($paging[1][0]) && $paging[2][0] == '上一章')$html .= urlencode(base64_encode($paging[1][0]));
             $html .= '">上一章</a></div>';
-            $html .= '<div class="col-md-6 col-sm-6 col-xs-6"><a href="javascript:void(0);" class="getArticle" data-url="';
+            $html .= '<div class="col-md-6 col-sm-6 col-xs-6"><a href="javascript:void(0);" class="getArticle" id="next" data-url="';
             if(isset($paging[1][1])):
                 $html .= urlencode(base64_encode($paging[1][1]));
             elseif ($paging[2][0] == '下一章'):
@@ -248,10 +248,10 @@ class BookController extends Controller{
             $html .= '">下一章</a></div>';
          else :
             $html .= '<div class="col-md-6 col-sm-6 col-xs-6">';
-            if(isset($paging[1][0]))$html .= '<a href="javascript:void(0);" class="getArticle" data-url="'.urlencode(base64_encode($paging[1][0])).'">'.$paging[2][0].'</a>';
+            if(isset($paging[1][0]))$html .= '<a href="javascript:void(0);" class="getArticle" id="prev" data-url="'.urlencode(base64_encode($paging[1][0])).'">'.$paging[2][0].'</a>';
             $html .= '</div>';
             $html .= '<div class="col-md-6 col-sm-6 col-xs-6">';
-            if(isset($paging[1][1]))$html .= '<a href="javascript:void(0);" class="getArticle" data-url="'.urlencode(base64_encode($paging[1][1])).'">'.$paging[2][1].'</a>';
+            if(isset($paging[1][1]))$html .= '<a href="javascript:void(0);" class="getArticle" id="next" data-url="'.urlencode(base64_encode($paging[1][1])).'">'.$paging[2][1].'</a>';
             $html .= '</div>';
         endif;
         return $html;
