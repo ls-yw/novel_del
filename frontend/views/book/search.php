@@ -50,11 +50,11 @@ AppAsset::register($this);
 	               <div class="row">
 	                  <div class="list-group">
 	                    <div class="list-group-item">
-	                       <h4 class="list-group-item-heading"><a href="<?=Url::to(['book/chapter','bookid'=>$list['id']])?>" target="_blank"><?=Helper::getRedKeyWord($list->name, $wd);?>&nbsp;&nbsp;<?=$hosts[$list->id]['name'];?></a></h4>
+	                       <h4 class="list-group-item-heading"><a href="<?=Url::to(['book/chapter','bookid'=>$list['id']])?>" target="_blank"><?=Helper::getRedKeyWord($list->name, $wd);?>&nbsp;&nbsp;<?=$hosts[$list->domain_id]['name'];?></a></h4>
 	                       <div class="row nomargin">
 	                           <div class="baseinfo row">
 	                               <div class="col-md-6 col-sm-6 col-xs-6"><strong class="novelinfo">作者：</strong><?=Helper::getRedKeyWord($list->author, $wd);?></div>
-	                               <div class="col-md-6 col-sm-6 col-xs-6"><strong class="novelinfo">来源：</strong><?=$hosts[$list->id]['domain'];?></div>
+	                               <div class="col-md-6 col-sm-6 col-xs-6"><strong class="novelinfo">来源：</strong><?=$hosts[$list->domain_id]['domain'];?></div>
 	                           </div>
 	                           <div class="list-group-item-text"><?=Helper::getRedKeyWord($list->description, $wd);?></div>
 	                       </div>
