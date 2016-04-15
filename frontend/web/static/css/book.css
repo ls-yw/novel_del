@@ -5,13 +5,13 @@
 .search-box{max-width:550px;margin:0 auto;}
 .search-box .logo{text-align:center;margin-bottom:10px;}
 
-nav{position: fixed;z-index: 301;}
+nav{position: fixed !important;z-index: 301;width:100%}
 .list_search{height:55px;border-bottom: 1px solid #ebebeb;position: fixed;z-index: 301;margin: 0;padding: 0;width:100%;background:#fff;}
 .list_search .logo{float: left;margin: 10px 0 0 10px;}
 .list_search #form{clear: none;float: left;margin: 11px 0 0 10px;display:inline-table;}
 .list_search #form input{width: 500px;}
 .search_content{padding-top:55px;margin-right:0;}
-.search_content .search_result{margin-left:120px;}
+.search_content .search_result,.search_content .page{margin-left:120px;}
 .search_content .search_result em{font-style: normal;color: #c00;}
 .search_content .search_result a em{text-decoration: underline;}
 .search_content .search_result .list-group-item{border:none;}
@@ -21,15 +21,14 @@ nav{position: fixed;z-index: 301;}
 .search_content .search_result .baseinfo .novelinfo{color: #666666;font-weight: normal;}
 
 @media (max-width: 768px){
-.search_content .search_result{margin:5px;}
+.search_content .search_result,.search_content .page{margin:5px;}
 
 .list_search #form input{width: 100%;}
-.navbar .navbar-collapse{display:inline-table;;border:none;margin-top:-15px;}
-.navbar .navbar-header{display:inline-block;}
+ .navbar .navbar-collapse .input-group{padding-bottom:8px;}
 }
 
 
-.bookinfo{padding-top:30px;}
+.bookinfo{padding-top:40px;}
 .bookinfo h1{text-align:center;}
 .bookinfo .bookbase{line-height:30px;text-align:center;}
 .bookinfo .bookbase strong{color: #666666;font-weight: normal;}

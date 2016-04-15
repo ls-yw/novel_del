@@ -37,11 +37,29 @@ class BookController extends Controller{
      * @return string
      */
     public function actionSearch(){
-        $wd    = htmlspecialchars(\Yii::$app->request->get('wd'));
+        $wd    = mb_substr(htmlspecialchars(\Yii::$app->request->get('wd')), 0, 50);
+        
+        //分词
+
+
+
+//         $keyword='我是真的很爱你';
+//         $cfg_soft_lang='utf-8';
+//         $sp = new SplitWord($cfg_soft_lang, $cfg_soft_lang);
+//         $sp->SetSource($keyword, $cfg_soft_lang, $cfg_soft_lang);
+//         $sp->SetResultType(2);
+//         $sp->StartAnalysis(TRUE);
+//         $keywords = $sp->GetFinallyResult(' ');
+        
+//         $keywords = preg_replace("/[ ]{1,}/", " ", trim($keywords));
+//         echo $keywords;
         
         if($wd == '')return $this->redirect('index');
         
-        $query = Books::find()->filterWhere(['like','name',$wd]);
+        $where = $this->dealKeywords($wd);
+        
+        //$query = Books::find()->filterWhere(['like','name',$wd]);
+        $query = Books::find()->where($where);
         
         $countQuery = clone $query;
         $count      = $countQuery->count();
@@ -54,6 +72,18 @@ class BookController extends Controller{
         $hosts = $this->getHosts();
         
         return $this->renderPartial('search', ['models'=>$models,'pages'=>$pages,'wd'=>$wd, 'hosts'=>$hosts]);
+    }
+    
+    
+    public function dealKeywords($keyword){
+    	$keywors = explode(' ', $keyword);
+    	$where = [];
+    	foreach ($keywors as $v){
+    		if(!empty($v)){
+    			$where[] = "CONCAT(`name`,`author`) like '%$v%'";
+    		}
+    	}
+    	return implode(' OR ', $where);
     }
     
     /**

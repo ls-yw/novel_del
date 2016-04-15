@@ -55,6 +55,7 @@ function getArticle(u){
 				return false;
 			}
 			$('#title').text(result.title);
+			$('title').text(result.title+'_竹刻书小说搜索');
 			$('.content').html(result.content);
 			$('.nextchapter').html(result.paging);
 			amendUrl(_getArticle+'&u='+u);
