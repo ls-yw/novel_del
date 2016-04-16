@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace common\widgets\dic;
 //常量定义
 define('DEDEINC','.');
@@ -43,16 +43,16 @@ class SplitWord
     
     //附加词典
     var $addonDic = array();
-    var $addonDicFile = 'data/words_addons.dic';
+    var $addonDicFile = '../../common/widgets/dic/data/words_addons.dic';
     
     //主词典 
     var $dicStr = '';
     var $mainDic = array();
     var $mainDicHand = FALSE;
     var $mainDicInfos = array();
-    var $mainDicFile = 'data/base_dic_full.dic';
+    var $mainDicFile = '../../common/widgets/dic/data/base_dic_full.dic';
     //是否直接载入词典（选是载入速度较慢，但解析较快；选否载入较快，但解析较慢，需要时才会载入特定的词条）
-    var $mainDicFileZip = 'data/base_dic_full.zip';
+    var $mainDicFileZip = '../../common/widgets/dic/data/base_dic_full.zip';
     var $isLoadAll = FALSE;
     var $isUnpacked = FALSE;
     
@@ -238,7 +238,7 @@ class SplitWord
         if($this->isUnpacked){
         	$this->mainDicHand = fopen($dicWords, 'r');
         }else{
-        	$this->InportDict($this->mainDicFileZip);
+        	return false;
         }
         
         //载入副词典
@@ -1105,19 +1105,6 @@ class SplitWord
         return TRUE;
      }
      
-	function InportDict( $targetfile )
-     {
-     	if(!ini_set('memory_limit', '128M'))
-			exit('设置内存错误，请到dede官网下载解压版的base_dic_full.dic!');
-     	require_once('zip.php');
-     	$zip = new zip();
-     	//echo $targetfile;
-     	$unpackagefile = array_keys($zip->Extract($targetfile,DEDEINC.'/data/'));
-     	//exit();
-     	$this->MakeDict(DEDEINC.'/data/'.$unpackagefile[0]);
-     	unlink(DEDEINC.'/data/'.$unpackagefile[0]);
-     	return true;
-     }
 }
 
 

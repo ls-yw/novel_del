@@ -9,6 +9,8 @@ use common\models\Domain;
 use common\widgets\Helper;
 use common\widgets\Curl;
 use yii\helpers\Url;
+use common\widgets\dic\SplitWord;
+use common\models\Keywords;
 
 class BookController extends Controller{
     
@@ -76,14 +78,50 @@ class BookController extends Controller{
     
     
     public function dealKeywords($keyword){
+//         $keyword = $this->getFenciKeywords($keyword);
+        $keyword = preg_replace("/[ ]{1,}/", " ", trim($keyword));
     	$keywors = explode(' ', $keyword);
     	$where = [];
     	foreach ($keywors as $v){
     		if(!empty($v)){
+    		    $this->saveKeyword($v);
     			$where[] = "CONCAT(`name`,`author`) like '%$v%'";
     		}
     	}
     	return implode(' OR ', $where);
+    }
+    
+    /**
+     * 分词
+     * @param unknown $keyword
+     */
+    public function getFenciKeywords($keyword){
+        $sp = new SplitWord();
+        $sp->SetSource($keyword);
+        $sp->SetResultType(2);
+        $sp->StartAnalysis(TRUE);
+        $keywords = $sp->GetFinallyResult(' ');
+
+        $keywords = preg_replace("/[ ]{1,}/", " ", trim($keywords));
+        return $keywords;
+    }
+    
+    /**
+     * 保存搜索关键字
+     * @param unknown $keyword
+     */
+    public function saveKeyword($keyword){
+        $model = Keywords::find()->where(['keyword'=>$keyword])->one();
+        if($model){
+            $model->count = $model->count + 1;
+            echo 1;
+        }else{
+            $model = new Keywords();
+            $model->keyword = $keyword;
+            $model->count = 1;
+            echo 2;
+        }
+        $model->save();
     }
     
     /**
