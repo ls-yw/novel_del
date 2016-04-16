@@ -9,6 +9,8 @@ return [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => false,
             'showScriptName' => false,
-        ]
+        ],
+        
     ],
+    'language'=>'zh-CN',
 ];
