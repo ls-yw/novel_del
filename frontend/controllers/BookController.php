@@ -114,12 +114,10 @@ class BookController extends Controller{
         $model = Keywords::find()->where(['keyword'=>$keyword])->one();
         if($model){
             $model->count = $model->count + 1;
-            echo 1;
         }else{
             $model = new Keywords();
             $model->keyword = $keyword;
             $model->count = 1;
-            echo 2;
         }
         $model->save();
     }
