@@ -12,6 +12,7 @@ AppAsset::register($this);
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <?= Html::csrfMetaTags()?>
 <title><?=$wd?>_竹刻书小说搜索</title>
 <meta name="keywords" content="<?=$wd?>,竹刻书小说搜索">
