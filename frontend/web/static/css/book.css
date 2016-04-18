@@ -27,6 +27,9 @@ nav{position: fixed !important;z-index: 301;width:100%}
  .navbar .navbar-collapse .input-group{padding-bottom:8px;}
 }
 
+@media (max-width: 380px){
+	.list_search #form{width:150px;}
+}
 
 .bookinfo{padding-top:40px;}
 .bookinfo h1{text-align:center;}
