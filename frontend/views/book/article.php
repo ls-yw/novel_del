@@ -1,11 +1,66 @@
 <?php
 use yii\helpers\Url;
+use common\widgets\Helper;
+$this->registerJsFile('/static/js/book.js');
 ?>
 <div class="row">
     <div class="bookinfo">
         <h1 id="title"></h1>
      </div>
 </div>
+<?php if(Helper::isMoblie() == false):?>
+<div class="cont-style">
+    <span>
+                背景颜色 <select id="bjys" onchange="selectbj(this);">
+                    <option value="#ffffff">默认</option>
+                    <option style="background-color: #fff" value="#000">黑色</option>
+                    <option style="background-color: #E9FAFF" value="#E9FAFF">淡蓝</option>
+                    <option style="background-color: #FFFFED" value="#FFFFED">明黄</option>
+                    <option style="background-color: #eefaee" value="#eefaee">淡绿</option>
+                    <option style="background-color: #FCEFFF" value="#FCEFFF">红粉</option>
+                    <option style="background-color: #efefef" value="#efefef">灰色</option>
+                </select>
+     </span>
+     <span>
+                字体颜色 <select id="ztys" onchange="selectzy(this);">
+                    <option value="#333333">默认</option>
+                    <option style="color: #000" value="#000">黑色</option>
+                    <option style="color: #000" value="#fff">白色</option>
+                    <option style="color: #0f0" value="#0f0">绿色</option>
+                    <option style="color: #060" value="#060">青色</option>
+                    <option style="color: #f00" value="#f00">红色</option>
+                    <option style="color: #00F" value="#00F">蓝色</option>
+                    <option style="color: #960" value="#960">橘黄</option>
+                </select>
+     </span>
+     <span>
+               字体大小 <select id="ztdx" onchange="selectzd(this);">
+                    <option value="14px">默认</option>
+                    <option value="16px">16号</option>
+                    <option value="18px">18号</option>
+                    <option value="20px">20号</option>
+                    <option value="22px">22号</option>
+                    <option value="24px">24号</option>
+                </select>
+     </span>
+     <span>
+               双击滚动 <select id="gdsd" onchange="selectgd(this);">
+                    <option value="0">滚屏</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+        (1-10，1最慢，10最快）
+     </span>
+</div>
+<?php endif;?>
 <div class="row">
     <div class="content">
         

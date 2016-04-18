@@ -19,12 +19,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'static/css/book.css',
+        'static/css/artdialog.css',
     ];
     public $js = [
         'static/js/jquery.min.js',
-        'static/js/book.js',
     	'static/js/tongji.js',
     	'static/js/bootstrap.min.js',
+        'static/js/common.js',
+        'static/js/artDialog.js',
     ];
     public $depends = [
         //'yii\web\YiiAsset',
