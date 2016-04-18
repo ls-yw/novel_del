@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use common\widgets\Helper;
-$this->registerJsFile('/static/js/book.js');
 ?>
 <div class="row">
     <div class="bookinfo">
