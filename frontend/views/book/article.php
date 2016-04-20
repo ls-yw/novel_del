@@ -77,6 +77,6 @@ use common\widgets\Helper;
 <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
 <input name="u" type="hidden" id="u" value="<?=urlencode(base64_encode($u))?>">
 <script type="text/javascript">
-var __getArticle = '<?=Url::to(['/book/ajaxarticle','doid'=>intval($_GET['doid'])])?>';
-var _getArticle = '<?=Url::to(['/book/article','doid'=>intval($_GET['doid'])])?>';
+var __getArticle = '<?=Url::to(['/book/ajaxarticle','doid'=>intval($_GET['doid']),'b'=>intval($_GET['b'])])?>';
+var _getArticle = '<?=Url::to(['/book/article','doid'=>intval($_GET['doid']),'b'=>intval($_GET['b'])])?>';
 </script>

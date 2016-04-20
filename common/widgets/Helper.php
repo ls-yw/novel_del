@@ -21,12 +21,49 @@ class Helper
      * 正则替换url中的各种ID
      * @param unknown $url
      * @param unknown $id
+     * @param string $mark
      * @return mixed
      */
-    public static function dealUrlId($url,$id) {
+    public static function dealUrlId($url,$id,$mark='') {
+        if($mark){
+            $mark = preg_replace('/<{bookid}>/i', $id, $mark);
+            $mark_id = self::calcMark($mark);
+            //替换mark_id
+            $url = preg_replace('/<{markid}>/i', $mark_id, $url);
+        }
+        
         //替换URL中的小说ID
         $url = preg_replace('/<{bookid}>/i', $id, $url);
         return $url;
+    }
+    
+    /**
+	 * 处理节点中文章子序号和 章节子序号的运算   暂时只支持一步运算
+	 * @param string $strnum   含加减乘数的字符串
+	 * @return number          运算后的结果
+	 */
+    public function calcMark($strnum){
+        $subchapterid_jia = explode('+', $strnum);
+        if(isset($subchapterid_jia['1'])){
+            return ($subchapterid_jia[0] + $subchapterid_jia[1]);
+        }
+        $subchapterid_jian = explode('-', $strnum);
+        if(isset($subchapterid_jian['1'])){
+            return ($subchapterid_jian[0] - $subchapterid_jian[1]);
+        }
+        $subchapterid_chen = explode('*', $strnum);
+        if(isset($subchapterid_chen['1'])){
+            return ($subchapterid_chen[0] * $subchapterid_chen[1]);
+        }
+        $subchapterid_chu = explode('%%', $strnum);
+        if(isset($subchapterid_chu['1'])){
+            return floor($subchapterid_chu[0] / $subchapterid_chu[1]);
+        }
+        $subchapterid_chu = explode('%', $strnum);
+        if(isset($subchapterid_chu['1'])){
+            return ($subchapterid_chu[0] % $subchapterid_chu[1]);
+        }
+        return '';
     }
     
     /**
@@ -79,10 +116,14 @@ class Helper
      */
     public static function dealRegular($str){
         $str = addslashes($str);
+        $str = preg_replace('/\(/', '\(', $str);
+        $str = preg_replace('/\)/', '\)', $str);
         $str = preg_replace('/\//', '\/', $str);
         $str = preg_replace('/\$/', '\d+', $str);
         $str = preg_replace('/\./', '\.', $str);
         $str = preg_replace('/\?/', '\?', $str);
+        $str = preg_replace('/(\r\n)|(\n)/', '[\r\n|\n]*', $str);
+        $str = preg_replace('/@/', '&nbsp;', $str);
         
         $str = preg_replace('/\*\*\*\*/', '([\w\W]*)', $str);
         return $str;
@@ -112,19 +153,22 @@ class Helper
         $match = preg_replace("|/$|", "", $match);
         $match_part = parse_url($match);
         $match_root = $match_part["scheme"] . "://" . $match_part["host"];
+        
+        if(substr($domain, -1) == '/'){
+            $domain = substr($domain, 0, -1);
+        }
 
         $search = array(
             "|^(\/)|i",
             "|^(?!http://)(?!mailto:)|i",
-            "|/\./|",
-            "|/[^\/]+/\.\./|"
+            "|/(\./)|",
+            //"|/[^\/]+/\.\./|"
         );
 
-        $replace = array("",
-            $match_root . "/",
-            $match . "/",
-            "/",
-            "/"
+        $replace = array($match_root . "/",
+            $domain . "/",
+            $domain."/",
+            //"/"
         );
 
         $expandedLinks = preg_replace($search, $replace, $links);
@@ -178,5 +222,41 @@ class Helper
         else{
             return false;
         }
+    }
+    
+    /**
+     * 错误提示赋值到session，前台调用alert组件输出提示信息
+     * @param string|array $error
+     */
+    public static function showError($error)
+    {
+        if (is_array($error)) {
+            $str = '';
+            foreach ($error as $k => $v) {
+                $str .= (is_array($v)) ? $v[0] : $v;
+                $str .= ' ';
+            }
+        } else {
+            $str = $error;
+        }
+        \Yii::$app->session->setFlash('error', $str);
+    }
+    
+    /**
+     * 成功提示赋值到session，前台调用alert组件输出提示信息
+     * @param string|array $success
+     */
+    public static function showSuccess($success)
+    {
+        if (is_array($success)) {
+            $str = '';
+            foreach ($success as $k => $v) {
+                $str .= (is_array($v)) ? $v[0] : $v;
+                $str .= ' ';
+            }
+        } else {
+            $str = $success;
+        }
+        \Yii::$app->session->setFlash('success', $str);
     }
 }

@@ -33,9 +33,8 @@ class Domain extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['domain', 'name', 'book_regular', 'author_regular', 'chapter_regular', 'content_regular', 'update_time', 'create_time'], 'required'],
-            [['update_time', 'create_time'], 'safe'],
-            [['domain'], 'string', 'max' => 100],
+            [['domain', 'name', 'book_regular', 'author_regular', 'chapter_regular', 'content_regular','bookname_regular','descript_regular','paging_regular','is_open'], 'required'],
+            [['domain','book_mark_id'], 'string', 'max' => 100],
             [['name'], 'string', 'max' => 50],
             [['book_regular', 'author_regular', 'chapter_regular', 'content_regular'], 'string', 'max' => 255]
         ];
@@ -48,12 +47,17 @@ class Domain extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'domain' => 'Domain',
-            'name' => 'Name',
-            'book_regular' => 'Book Regular',
-            'author_regular' => 'Author Regular',
-            'chapter_regular' => 'Chapter Regular',
-            'content_regular' => 'Content Regular',
+            'domain' => '站点域名',
+            'name' => '站点名称',
+            'book_regular' => '小说规则',
+            'author_regular' => '作者规则',
+            'chapter_regular' => '章节规则',
+            'content_regular' => '内容规则',
+            'is_open' => '是否采集',
+            'bookname_regular' => '小说名称规则',
+            'descript_regular' => '简介规则',
+            'paging_regular' => '上下章规则',
+            'book_mark_id' => '小说URL子序号运算方式',
             'update_time' => 'Update Time',
             'create_time' => 'Create Time',
         ];

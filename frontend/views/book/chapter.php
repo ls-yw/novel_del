@@ -13,7 +13,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $book->description
 </div>
 <div class="row chapter">
     <?php if(isset($chapters[1])):foreach ($chapters[1] as $k => $v):?>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 chapterlink"><a href="<?=Url::to(['book/article', 'doid'=>$book->domain_id,'u'=>urlencode(base64_encode($v))])?>" title="<?=$chapters[2][$k]?>" target="_blank"><?=$chapters[2][$k]?></a></div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 chapterlink"><a href="<?=Url::to(['book/article', 'doid'=>$book->domain_id,'u'=>urlencode(base64_encode($v)),'b'=>$book->book_id])?>" title="<?=$chapters[2][$k]?>" target="_blank"><?=$chapters[2][$k]?></a></div>
     <?php endforeach;endif;?>
 </div>
 <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">

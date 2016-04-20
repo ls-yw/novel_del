@@ -12,5 +12,6 @@ return [
         ],
         
     ],
+    'timeZone'=>'Asia/Shanghai',
     'language'=>'zh-CN',
 ];

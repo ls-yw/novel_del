@@ -172,7 +172,7 @@ class BookController extends Controller{
             $host->domain = Helper::repairDomain($host->domain);
             
             $url = Helper::expandlinks($host->book_regular,$host->domain);
-            $url = Helper::dealUrlId($url, $book->book_id);
+            $url = Helper::dealUrlId($url, $book->book_id, $host->book_mark_id);
             
             $curl = new Curl();
             $curl->get($url);
@@ -180,7 +180,7 @@ class BookController extends Controller{
             if($curl->responseCode == 200){
                 $regular = Helper::dealUrlId($host->chapter_regular, $book->book_id);
                 $chapters =$this->collectLinks($curl->response, $regular);
-                $chapterHtml = $this->chapterHtml($chapters, $book->domain_id);
+                $chapterHtml = $this->chapterHtml($chapters, $book);
                 $result['code'] = 0;
                 $result['chapter'] = $chapterHtml;
                 die(json_encode($result));
@@ -233,6 +233,7 @@ class BookController extends Controller{
     public function actionAjaxarticle(){
         if(\Yii::$app->request->isAjax){
             $u = base64_decode(urldecode(\Yii::$app->request->get('u')));
+            $b = intval(\Yii::$app->request->get('b'));
             
             $domain_id = intval(\Yii::$app->request->get('doid'));
             $host = Domain::findOne($domain_id);
@@ -243,8 +244,10 @@ class BookController extends Controller{
             }
             $host->domain = Helper::repairDomain($host->domain);
             
-            $url = Helper::expandlinks($u,$host->domain);
-            
+            $url = Helper::expandlinks($host->book_regular,$host->domain);
+            $url = Helper::dealUrlId($url, $b, $host->book_mark_id);
+            $url = Helper::expandlinks($u,$url);
+//             echo $url;exit;
             $curl = new Curl();
             $curl->get($url);
             
@@ -252,7 +255,7 @@ class BookController extends Controller{
                 $content = Helper::iconvUTF8($curl->response);
                 $preg = Helper::dealRegular($host->content_regular);
                 $body = $this->collectContent($content, $preg);
-            
+                
                 //获取标题
                 $title = Helper::pregTitle($content);
             
@@ -285,11 +288,11 @@ class BookController extends Controller{
      * 拼接章节
      * @param unknown $chapters
      */
-    public function chapterHtml($chapters, $doid){
+    public function chapterHtml($chapters, $book){
         $html = '';
         if(isset($chapters[1])):
             foreach ($chapters[1] as $k => $v):
-                $html .= '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 chapterlink"><a href="'.Url::to(['book/article', 'doid'=>$doid,'u'=>urlencode(base64_encode($v))]).'" title="'.$chapters[2][$k].'" target="_blank">'.$chapters[2][$k].'</a></div>';
+                $html .= '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 chapterlink"><a href="'.Url::to(['book/article', 'doid'=>$book->domain_id,'u'=>urlencode(base64_encode($v)),'b'=>$book->book_id]).'" title="'.$chapters[2][$k].'" target="_blank">'.$chapters[2][$k].'</a></div>';
             endforeach;
         endif;
         return $html;

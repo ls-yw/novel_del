@@ -27,6 +27,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
 	public $newpassword;
 	public $oldpassword;
 	public $_user;
+	public $rememberMe;
 	
     /**
      * @inheritdoc
@@ -64,6 +65,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
 			'pwd' => ['oldpassword','password','repassword'],
 			'login' => ['username','password'],
 			'set' => ['truename'],
+    	    'other'=>[],
     	];
     }
 
@@ -142,7 +144,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
     public function login(){
     	if ($this->validate()) {
     		//print_r($this->getUser());exit;
-    		return Yii::$app->user->login($this->getUser());
+    		return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
     	} else {
     		return false;
     	}
@@ -214,5 +216,35 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
+    /**
+     * 成功登录
+     */
+    public function successLogin(){
+        $user = $this->getUser();
+        $user->last_time = date('Y-m-d H:i:s',time());
+        
+        $user->scenario = 'other';
+        $user->save();
+        
+        $this->loginLogs('success');
+    }
+    
+    /**
+     * 记录登录日志
+     * @param string $status
+     */
+    public function loginLogs($status = 'error'){
+        $model = new AdminLogs();
+        $model->username = $this->username;
+        $model->password = ($status != 'success') ? $this->password : '';
+        $model->ip = \Yii::$app->request->userIP;
+        $model->add_time = date('Y-m-d H:i:s',time());
+        $model->save();
+        if($model->errors){
+            print_r($user->errors);
+            exit;
+        }
+    }
+    
 	
 }
