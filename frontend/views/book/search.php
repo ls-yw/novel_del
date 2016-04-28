@@ -57,7 +57,7 @@ AppAsset::register($this);
 	                               <div class="col-md-6 col-sm-6 col-xs-6"><strong class="novelinfo">作者：</strong><?=Helper::getRedKeyWord($list->author, $wd);?></div>
 	                               <div class="col-md-6 col-sm-6 col-xs-6"><strong class="novelinfo">来源：</strong><?=$hosts[$list->domain_id]['domain'];?></div>
 	                           </div>
-	                           <div class="list-group-item-text"><?=Helper::getRedKeyWord($list->description, $wd);?></div>
+	                           <div class="list-group-item-text"><?=Helper::getRedKeyWord(strip_tags($list->description), $wd);?></div>
 	                       </div>
 	                    </div>
 	                  </div>
