@@ -27,7 +27,6 @@ class AppAsset extends AssetBundle
     	'static/js/bootstrap.min.js',
         'static/js/common.js',
         'static/js/artDialog.js',
-    	'static/js/book.js',
     ];
     public $depends = [
         //'yii\web\YiiAsset',

@@ -191,7 +191,7 @@ class BookController extends Controller{
                     die(json_encode($result));
                 }
                 $result['code'] = -2;
-                $result['msg']  = '解码失败，请稍后再试';
+                $result['msg']  = '解码失败，请稍后再试，或可点击<a href="'.$url.'" target="_blank">'.$url.'</a>前往原网站阅读。';
                 die(json_encode($result));
             }
         }
@@ -278,7 +278,7 @@ class BookController extends Controller{
                     die(json_encode($result));
                 }
                 $result['code'] = -2;
-                $result['msg']  = '解码失败，请稍后再试';
+                $result['msg']  = '解码失败，请稍后再试，或可点击<a href="'.$url.'" target="_blank">'.$url.'</a>前往原网站阅读。';
                 die(json_encode($result));
             }
         }

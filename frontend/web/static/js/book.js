@@ -41,16 +41,25 @@ function getArticle(u){
 	$.ajax({
 		url:__getArticle,
 		//data:{u:u,_csrf:$('#_csrf').val()},
+		async:false,
 		data:{'u':u},
 		dataType:'json',
-		timeout:20000,
+		timeout:30000,
 		type:'GET',
 		error:function(XMLHttpRequest, textStatus, errorThrown){
 			loadBox();
 			if(textStatus == 'timeout'){
+				if(errorThrown){
+					console.log(errorThrown)
+				}
 				alertMsg('网络繁忙，请稍后再试');
 				return false;
 			}else{
+				if(textStatus){
+					console.log(textStatus)
+				}else{
+					console.log(errorThrown)
+				}
 				alertMsg('请稍后再试，若尝试多次后还不可以，请联系管理员');
 				return false;
 			}
