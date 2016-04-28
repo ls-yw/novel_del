@@ -60,11 +60,13 @@ class Curl
      * Default curl options
      */
     private $_defaultOptions = array(
-        CURLOPT_USERAGENT      => 'Yii2-Curl-Agent',
+        CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0',
         CURLOPT_TIMEOUT        => 30,
         CURLOPT_CONNECTTIMEOUT => 30,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HEADER         => false,
+        CURLOPT_REFERER        => '/',
+        CURLOPT_HTTPHEADER     => '',
     );
 
 
@@ -285,6 +287,10 @@ class Curl
         if ($method === 'HEAD') {
             $this->setOption(CURLOPT_NOBODY, true);
             $this->unsetOption(CURLOPT_WRITEFUNCTION);
+        }
+        
+        if($this->_defaultOptions[CURLOPT_REFERER] == '/'){
+            $this->setOption(CURLOPT_REFERER, $url);
         }
 
         //setup error reporting and profiling

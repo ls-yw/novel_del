@@ -135,8 +135,18 @@ class Helper
      * @return string
      */
     public static function iconvUTF8($str){
-        $encode_arr = array('UTF-8','ASCII','GBK','GB2312','BIG5','JIS','eucjp-win','sjis-win','EUC-JP');
+        $encode_arr = array('ASCII','GBK','GB2312','BIG5','JIS','eucjp-win','sjis-win','EUC-JP','UTF-8');
         $encoded = mb_detect_encoding($str, $encode_arr);
+        /* self::WriteLog($encoded);
+        if(empty($encoded)){
+            self::WriteLog('不限制查编码');
+            $newencoded = mb_detect_encoding($str);
+            self::WriteLog($newencoded);
+            $encode_arr = array('ASCII','GB2312','GBK','UTF-8','BIG5','JIS','eucjp-win','sjis-win','EUC-JP');
+            $newencoded = mb_detect_encoding($str,$encode_arr);
+            self::WriteLog($newencoded);
+            $encoded = 'GBK';
+        } */
 //         $str = ($encoded != 'UTF-8') ? mb_convert_encoding($str,'UTF-8',$encoded) : $str;
         $str = ($encoded != 'UTF-8') ? iconv($encoded,'UTF-8//IGNORE',$str) : $str;
         return $str;
@@ -259,5 +269,30 @@ class Helper
             $str = $success;
         }
         \Yii::$app->session->setFlash('success', $str);
+    }
+    
+    /**
+     * 获取设置curl IP的数据
+     * @param string $ip
+     */
+    public static function getCurlIp($ip=''){
+        if(empty($ip))$ip = \Yii::$app->request->userIP;
+        return array('X-FORWARDED-FOR:'.$ip, 'CLIENT-IP:'.$ip);
+    }
+    
+    /**
+     * 写入文章内容保存为inc文件
+     * @param int    $sort_id    栏目ID
+     * @param int    $book_id    小说ID
+     * @param int    $article_id 文章ID
+     * @param string $body       文章内容
+     */
+    public static function WriteLog($str,$file='../../logs/log.log',$type='a')
+    {
+        $str .= "\r\n============================================================================\r\n";
+        @$fp = fopen($file,$type);
+        @flock($fp);
+        @fwrite($fp,$str);
+        @fclose($fp);
     }
 }

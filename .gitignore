@@ -41,3 +41,4 @@ requirements.php
 *.ico
 logo.png
 theme/
+logs/

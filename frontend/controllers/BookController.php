@@ -175,6 +175,8 @@ class BookController extends Controller{
             $url = Helper::dealUrlId($url, $book->book_id, $host->book_mark_id);
             
             $curl = new Curl();
+            //伪造IP
+            $curl->setOption(CURLOPT_HTTPHEADER, Helper::getCurlIp());
             $curl->get($url);
             
             if($curl->responseCode == 200){
@@ -249,12 +251,27 @@ class BookController extends Controller{
             $url = Helper::expandlinks($u,$url);
 //             echo $url;exit;
             $curl = new Curl();
+            //伪造IP
+            $curl->setOption(CURLOPT_HTTPHEADER, Helper::getCurlIp());
             $curl->get($url);
             
             if($curl->responseCode == 200){
-                $content = Helper::iconvUTF8($curl->response);
+                
+                $content = $curl->response;
+//                 Helper::WriteLog("转码前：",'../../logs/log.log','w');
+//                 Helper::WriteLog($content);
+                $content = Helper::iconvUTF8($content);
+//                 Helper::WriteLog("转码后：");
+//                 Helper::WriteLog($content);
                 $preg = Helper::dealRegular($host->content_regular);
+                
                 $body = $this->collectContent($content, $preg);
+                
+                if(empty($body)){
+                    $result['code'] = -3;
+                    $result['msg']  = '解码失败，请稍后再试或可点击<a href="'.$url.'" target="_blank">'.$url.'</a>前往原网站阅读。';
+                    die(json_encode($result));
+                }
                 
                 //获取标题
                 $title = Helper::pregTitle($content);
@@ -270,6 +287,7 @@ class BookController extends Controller{
                 $result['title'] = $title;
                 $result['content'] = $body[0];
                 $result['paging'] = $pagingHtml;
+                
                 die(json_encode($result));
             }else{
                 if($curl->responseCode == 404){
@@ -278,7 +296,9 @@ class BookController extends Controller{
                     die(json_encode($result));
                 }
                 $result['code'] = -2;
-                $result['msg']  = '解码失败，请稍后再试，或可点击<a href="'.$url.'" target="_blank">'.$url.'</a>前往原网站阅读。';
+                $result['msg']  = '目标网站连接失败，请稍后再试或可点击<a href="'.$url.'" target="_blank">'.$url.'</a>前往目标网站阅读。';
+                $result['htmlcode'] = $curl->responseCode;
+                $result['htmlbody'] = $curl->response;
                 die(json_encode($result));
             }
         }
