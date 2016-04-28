@@ -29,6 +29,7 @@ use yii\helpers\Url;
 					  <tr>
 						  <th>网站名称</th>
 						  <th>网站域名</th>
+						  <th>小说数量</th>
 						  <th>采集状态</th>
 						  <th>更新时间</th>        
 						  <th>操  作</th>                                  
@@ -41,6 +42,7 @@ use yii\helpers\Url;
 					<tr>
 						<td><?=$v['name']?></td>
 						<td class="center"><?=$v['domain']?></td>
+						<td class="center"><?=isset($books[$v['id']]) ? $books[$v['id']] : 0;?></td>
 						<td class="center"><?=($v['is_open']) ? '<span class="green label">已开启</span>' : '<span class="gray label">已关闭</span>';?></td>
 						<td class="center"><?=$v['update_time']?></td>    
 						<td>

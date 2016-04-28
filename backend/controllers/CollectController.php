@@ -5,6 +5,7 @@ use yii\web\Controller;
 use common\models\Domain;
 use yii\data\Pagination;
 use common\widgets\Helper;
+use common\models\Books;
 
 class CollectController extends Controller
 {
@@ -40,9 +41,17 @@ class CollectController extends Controller
             ->limit($pages->limit)
             ->all();
         
+        //获取站点小说数
+        $books = Books::find()->select('domain_id,COUNT(id) as count')->groupBy('domain_id')->asArray()->all();
+        $bookArr = array();
+        foreach ($books as $v){
+        	$bookArr[$v['domain_id']] = $v['count'];
+        }
+        
         $data = array();
         $data['model'] = $model;
         $data['pages'] = $pages;
+        $data['books'] = $bookArr;
         
         return $this->render('index', $data);
     }
