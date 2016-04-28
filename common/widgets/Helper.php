@@ -137,7 +137,8 @@ class Helper
     public static function iconvUTF8($str){
         $encode_arr = array('UTF-8','ASCII','GBK','GB2312','BIG5','JIS','eucjp-win','sjis-win','EUC-JP');
         $encoded = mb_detect_encoding($str, $encode_arr);
-        $str = ($encoded != 'UTF-8') ? mb_convert_encoding($str,'UTF-8',$encoded) : $str;
+//         $str = ($encoded != 'UTF-8') ? mb_convert_encoding($str,'UTF-8',$encoded) : $str;
+        $str = ($encoded != 'UTF-8') ? iconv($encoded,'UTF-8//IGNORE',$str) : $str;
         return $str;
     }
     
