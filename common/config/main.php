@@ -11,7 +11,7 @@ return [
             'showScriptName' => false,
         ],
         'configs' => [
-            'class' => 'common\helper\getConfigs',
+            'class' => 'common\helper\GetConfigs',
         ],
     ],
     'timeZone'=>'Asia/Shanghai',

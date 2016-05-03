@@ -48,7 +48,7 @@ $this->registerCss('.footer{position:absolute;bottom:0px;width:100%;}');
         <?php ActiveForm::end();?>
         <div class="keyword-hot">
             <?php if($keywords):?>
-            <span>热门搜素：</span>
+            <span>热门搜索：</span>
             <?php foreach ($keywords as $v):?>
             <a href="<?=Url::to(['search','wd'=>$v->keyword])?>"><?=$v->keyword?></a>
             <?php endforeach;endif;?>
