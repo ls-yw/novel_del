@@ -2973,3 +2973,26 @@ ul.messagesList li span.date {
 	}
     
 }
+
+
+.loading{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	background:#000;
+	position:fixed;
+	top:45%;
+	left:45%;
+	filter:alpha(opacity=50);  
+    -moz-opacity:0.5;  
+    -khtml-opacity: 0.5;  
+    opacity: 0.5;  
+	color:#fff;
+	border-radius:5px;
+	text-align:center;
+	font-family: "黑体";
+	z-index:999;
+}
+.loading img{
+	margin:0 auto;
+}

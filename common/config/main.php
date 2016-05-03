@@ -10,7 +10,9 @@ return [
             'enableStrictParsing' => false,
             'showScriptName' => false,
         ],
-        
+        'configs' => [
+            'class' => 'common\helper\getConfigs',
+        ],
     ],
     'timeZone'=>'Asia/Shanghai',
     'language'=>'zh-CN',

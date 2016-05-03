@@ -84,4 +84,63 @@ class CollectController extends Controller
         
         return $this->render('set-domain', $data);
     }
+    
+    /**
+     * 更改站点采集状态
+     * @param unknown $id
+     */
+    public function actionSetStatus($id) {
+        if(\Yii::$app->request->isAjax){
+            $status = \Yii::$app->request->post('status');
+            $model = Domain::findOne($id);
+            
+            if(!$model){
+                $result['code'] = -1;
+                $result['msg']  = '记录不存在';
+                die(json_encode($result));
+            }
+            
+            $model->is_open = $status;
+            $model->update_time = date('Y-m-d H:i:s',time());
+            if($model->save()){
+                $result['code'] = 0;
+                $result['msg']  = '更改成功';
+                die(json_encode($result));
+            }else{
+                $result['code'] = -2;
+                $result['msg']  = '更改失败';
+            }
+        }else{
+            $result['code'] = -3;
+            $result['msg']  = '非法访问';
+        }
+        die(json_encode($result));
+    }
+    
+    /**
+     * 删除站点
+     * @param unknown $wd
+     */
+    public function actionDelDomain($id){
+        $model = Domain::findOne($id);
+         
+        if(!$model){
+            Helper::showError('数据不存在');
+            return $this->redirect(['index']);
+        }
+        
+        //该站点下面有小说数据不允许删除
+        $books = Books::find()->where(['domain_id'=>$id])->count();
+        if($books > 0){
+            Helper::showError('该站点下还有小说，不允许删除');
+            return $this->redirect(['index']);
+        }
+         
+        if($model->delete()){
+            Helper::showSuccess('删除成功');
+        }else{
+            Helper::showError('删除失败');
+        }
+        return $this->redirect(['index']);
+    }
 }

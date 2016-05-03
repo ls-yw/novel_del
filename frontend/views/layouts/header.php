@@ -18,7 +18,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?>_竹刻书小说搜索</title>
+    <title><?= Html::encode($this->title) ?>_<?=Yii::$app->configs->get['hostname'];?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -35,7 +35,7 @@ AppAsset::register($this);
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-	      <a class="navbar-brand" href="/"><img src="/logo.png" width="100"></a></a>
+	      <a class="navbar-brand" href="http://<?=Yii::$app->configs->get['host'];?>"><img src="/logo.png" width="100"></a></a>
 	    </div>
 	
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,7 +73,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; 竹刻书小说 <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <a href="http://<?=Yii::$app->configs->get['host'];?>"><?=Yii::$app->configs->get['hostname'];?></a> <?= date('Y') ?></p>
 
         <p class="pull-right"></p>
     </div>

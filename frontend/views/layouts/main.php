@@ -67,7 +67,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; 竹刻书小说 <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <a href="http://<?=Yii::$app->configs->get['host'];?>"><?=Yii::$app->configs->get['hostname'];?></a> <?= date('Y') ?></p>
 
         <p class="pull-right"></p>
     </div>

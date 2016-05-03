@@ -2,6 +2,7 @@
 use yii\widgets\ActiveForm;
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 
@@ -14,9 +15,9 @@ $this->registerCss('.footer{position:absolute;bottom:0px;width:100%;}');
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title>竹刻书小说搜索</title>
-    <meta name="keywords" content="竹刻书,竹刻书小说搜索,小说搜索,玄幻修真小说">
-    <meta name="description" content="竹刻书小说搜索内容来源于网络。">
+    <title><?=Yii::$app->configs->get['hostname'];?></title>
+    <meta name="keywords" content="<?=Yii::$app->configs->get['keywords'];?>">
+    <meta name="description" content="<?=Yii::$app->configs->get['description'];?>">
     <?php $this->head() ?>
 </head>
 <body>
@@ -25,7 +26,7 @@ $this->registerCss('.footer{position:absolute;bottom:0px;width:100%;}');
    <div class="container">
     <div class="row auhe">&nbsp;</div>
     <div class="row search-box">
-      <div class="col-lg-12 logo"><img alt="竹刻书小说" src="/logo.png" width="150"></div>
+      <div class="col-lg-12 logo"><img alt="<?=Yii::$app->configs->get['hostname'];?>" src="/logo.png" width="150"></div>
       <div class="col-lg-12">
       <?php ActiveForm::begin(['method' => 'get','action' => ['search']]);?>
         <div class="input-group">
@@ -45,6 +46,13 @@ $this->registerCss('.footer{position:absolute;bottom:0px;width:100%;}');
           </span>
         </div><!-- /input-group -->
         <?php ActiveForm::end();?>
+        <div class="keyword-hot">
+            <?php if($keywords):?>
+            <span>热门搜素：</span>
+            <?php foreach ($keywords as $v):?>
+            <a href="<?=Url::to(['search','wd'=>$v->keyword])?>"><?=$v->keyword?></a>
+            <?php endforeach;endif;?>
+        </div>
       </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
 </div>
@@ -52,7 +60,7 @@ $this->registerCss('.footer{position:absolute;bottom:0px;width:100%;}');
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; 竹刻书小说  <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <a href="http://<?=Yii::$app->configs->get['host'];?>"><?=Yii::$app->configs->get['hostname'];?></a>  <?= date('Y') ?></p>
 
         <p class="pull-right"></p>
     </div>

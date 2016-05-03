@@ -43,7 +43,7 @@ use yii\helpers\Url;
 						<td><?=$v['name']?></td>
 						<td class="center"><?=$v['domain']?></td>
 						<td class="center"><?=isset($books[$v['id']]) ? $books[$v['id']] : 0;?></td>
-						<td class="center"><?=($v['is_open']) ? '<span class="green label">已开启</span>' : '<span class="gray label">已关闭</span>';?></td>
+						<td class="center showStatus" data-id="<?=$v['id']?>"><?=($v['is_open']) ? '<a href="javascript:void(0)" onclick="domianStatus('.$v['id'].',0)" class="green label">已开启</a>' : '<a href="javascript:void(0)" onclick="domianStatus('.$v['id'].',1)" class="gray label">已关闭</a>';?></td>
 						<td class="center"><?=$v['update_time']?></td>    
 						<td>
 						  <a href="<?=Url::to(['/collect/set-domain','id'=>$v['id']])?>" class="btn btn-info">
@@ -65,3 +65,20 @@ use yii\helpers\Url;
 		</div>
 	</div><!--/span-->
 </div>
+<input name="_csrf" id="_csrf" type="hidden" value="<?=Yii::$app->request->getCsrfToken()?>"/>
+<script >
+function domianStatus(id,status){
+	loading()
+	$.post("<?=Url::to(['set-status'])?>?id="+id,{status:status,_csrf:$('#_csrf').val()},function(result){
+		loading()
+		if(result.code < 0){
+			alertMsg(result.msg);
+		}else if(result.code == 0){
+			var html = (status==1) ? '<a href="javascript:void(0)" onclick="domianStatus('+id+',0)" class="green label">已开启</a>' : '<a href="javascript:void(0)" onclick="domianStatus('+id+',1)" class="gray label">已关闭</a>';
+			$('.showStatus[data-id='+id+']').html(html);
+			
+		}
+	},'json');
+}			  
+
+</script >

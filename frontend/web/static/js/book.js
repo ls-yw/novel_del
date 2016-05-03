@@ -16,8 +16,6 @@ $(function(){
 		getArticle($('#u').val());
 	}
 	
-	$('.auhe').height($(window).height()*0.34);
-	
 	read_bjys = getcookie('read_bjys');
 	read_ztys = getcookie('read_ztys');
 	read_ztdx = getcookie('read_ztdx');

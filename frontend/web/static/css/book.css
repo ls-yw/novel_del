@@ -4,6 +4,9 @@
 
 .search-box{max-width:550px;margin:0 auto;}
 .search-box .logo{text-align:center;margin-bottom:10px;}
+.keyword-hot{height:30px;line-height:30px;}
+.keyword-hot span{color:#0080ff}
+.keyword-hot a{color:red;margin-right:5px;}
 
 nav{position: fixed !important;z-index: 301;width:100%}
 .list_search{height:55px;border-bottom: 1px solid #ebebeb;position: fixed;z-index: 301;margin: 0;padding: 0;width:100%;background:#fff;}
@@ -110,5 +113,6 @@ nav{position: fixed !important;z-index: 301;width:100%}
 
 .cont-style{border:1px solid #84DF81;padding:5px;}
 .cont-style span{margin-right:5px;}
+
 
 /*.footer{position:absolute;bottom:0px;width:100%;}*/

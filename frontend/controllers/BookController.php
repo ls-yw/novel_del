@@ -31,7 +31,13 @@ class BookController extends Controller{
     }
     
     public function actionIndex(){
-        return $this->renderPartial('index');
+        //获取热门搜索
+        $keywords = Keywords::find()->where(['is_hot'=>1])->limit(5)->all();
+        
+        $data = array();
+        $data['keywords'] = $keywords;
+        
+        return $this->renderPartial('index',$data);
     }
     
     /**

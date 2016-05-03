@@ -37,7 +37,7 @@ use yii\helpers\Url;
 	<!-- start: Favicon -->
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- end: Favicon -->
-	
+	<script src="/static/js/jquery-1.9.1.min.js"></script>
 </head>
 
 <body>
@@ -57,7 +57,11 @@ use yii\helpers\Url;
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
-						
+						<li>
+							<a class="btn" target="_blank" href="http://<?=Yii::$app->configs->get['host']?>" title="网站预览">
+								<i class="halflings-icon white home"></i>
+							</a>
+						</li>
 						<!-- start: Message Dropdown -->
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -132,11 +136,11 @@ use yii\helpers\Url;
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 小说站点</span></a>
 							<ul>
-								<li><a class="js_domain" href="<?=Url::to(['/collect/index'])?>"><i class="icon-file-alt"></i><span class="hidden-tablet"> 目标小说站</span></a></li>
-								<li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 2</span></a></li>
-								<li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li>
+								<li><a class="submenu" href="<?=Url::to(['/collect/index'])?>"><i class="icon-file-alt"></i><span class="hidden-tablet"> 目标小说站</span></a></li>
 							</ul>	
 						</li>
+						<li><a href="<?=Url::to(['/index/keywords'])?>"><i class="icon-search"></i><span class="hidden-tablet"> 搜索关键词</span></a></li>
+						<li><a href="<?=Url::to(['/system/index'])?>"><i class="icon-cog"></i><span class="hidden-tablet"> 系统设置</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -153,19 +157,6 @@ use yii\helpers\Url;
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
 		
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body">
-			<p>Here settings can be configured...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
-		</div>
-	</div>
 	
 	<div class="clearfix"></div>
 	
@@ -180,7 +171,6 @@ use yii\helpers\Url;
 	
 	<!-- start: JavaScript-->
 
-	<script src="/static/js/jquery-1.9.1.min.js"></script>
 	<script src="/static/js/jquery-migrate-1.0.0.min.js"></script>
 	
 		<script src="/static/js/jquery-ui-1.10.0.custom.min.js"></script>

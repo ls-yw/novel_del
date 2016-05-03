@@ -14,8 +14,8 @@ AppAsset::register($this);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?= Html::csrfMetaTags()?>
-<title><?=$wd?>_竹刻书小说搜索</title>
-<meta name="keywords" content="<?=$wd?>,竹刻书小说搜索">
+<title><?=$wd?>_<?=Yii::$app->configs->get['hostname'];?></title>
+<meta name="keywords" content="<?=$wd?>,<?=Yii::$app->configs->get['hostname'];?>">
 <meta name="description" content="<?=$wd?>">
 <?php $this->head()?>
 </head>
@@ -23,7 +23,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 	<div class="wrap">
 	   <div class="row list_search">
-	       <div class="logo"><a href="/"><img src="/logo.png" width="100"></a></div>
+	       <div class="logo"><a href="http://<?=Yii::$app->configs->get['host'];?>"><img src="/logo.png" width="100"></a></div>
               <?php ActiveForm::begin(['method' => 'get','action' => ['search'], 'id'=>'form']);?>
                 <div class="input-group">
                   <!-- <div class="input-group-btn">
