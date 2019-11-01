@@ -119,11 +119,11 @@ use yii\helpers\Url;
 								<label class="control-label">是否开启采集：</label>
 								<div class="controls">
 								  <label class="radio">
-									<input type="radio" <?if($model->is_open == 1 || $model->is_open == '')echo 'checked="checked"';?> value="1" id="optionsRadios1" name="Domain[is_open]">
+									<input type="radio" <?php if($model->is_open == 1 || $model->is_open == '')echo 'checked="checked"';?> value="1" id="optionsRadios1" name="Domain[is_open]">
 								 	开启
 								  </label>
 								  <label class="radio" style="padding-top:5px;">
-									<input type="radio" <?if($model->is_open === 0)echo 'checked="checked"';?> value="0" id="optionsRadios2" name="Domain[is_open]">
+									<input type="radio" <?php if($model->is_open === 0)echo 'checked="checked"';?> value="0" id="optionsRadios2" name="Domain[is_open]">
 									关闭
 								  </label>
 								</div>

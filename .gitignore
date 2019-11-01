@@ -16,12 +16,6 @@ nbproject
 Thumbs.db
 
 
-yii
-yii.bat
-init
-init.bat
-
-
 # composer itself is not needed
 composer.phar
 
@@ -34,11 +28,3 @@ phpunit.phar
 /phpunit.xml
 
 runtime/
-console/
-environments/
-tests/
-requirements.php
-*.ico
-logo.png
-theme/
-logs/

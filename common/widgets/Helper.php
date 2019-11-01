@@ -171,7 +171,7 @@ class Helper
 
         $search = array(
             "|^(\/)|i",
-            "|^(?!http://)(?!mailto:)|i",
+            "|^(?!http://)(?!https://)(?!mailto:)|i",
             "|/(\./)|",
             //"|/[^\/]+/\.\./|"
         );

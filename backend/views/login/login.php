@@ -56,7 +56,7 @@ use yii\helpers\Url;
 						<a href="#"><i class="halflings-icon cog"></i></a>
 					</div>
 					<h2>登录你的帐号</h2>
-					<form class="form-horizontal" action="<?Url::to(['/login/login'])?>" method="post">
+					<form class="form-horizontal" action="<?=Url::to(['/login/login'])?>" method="post">
 					<input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
 						<fieldset>
 							

@@ -10,6 +10,8 @@ use common\widgets\Helper;
 
 class AdminController extends Controller
 {
+
+    public $enableCsrfValidation = false;
     /**
      * (non-PHPdoc)
      * @see \yii\web\Controller::beforeAction()
@@ -50,7 +52,6 @@ class AdminController extends Controller
      */
     public function actionAdd()
     {
-
         //$model = new AdminSetForm();
         $model = new Admin();
         $model->scenario = 'add';
@@ -63,10 +64,12 @@ class AdminController extends Controller
                     Helper::showError('添加失败');
                 }
             } else {
+                print_r($model->errors);
                 if ($model->errors) {
                     Helper::showError($model->errors);
                 }
             }
+            exit;
         }
 
         $data = array();

@@ -176,7 +176,6 @@ class BookController extends Controller{
             
             $host = Domain::findOne($book->domain_id);
             $host->domain = Helper::repairDomain($host->domain);
-            
             $url = Helper::expandlinks($host->book_regular,$host->domain);
             $url = Helper::dealUrlId($url, $book->book_id, $host->book_mark_id);
             
@@ -184,7 +183,7 @@ class BookController extends Controller{
             //伪造IP
             $curl->setOption(CURLOPT_HTTPHEADER, Helper::getCurlIp());
             $curl->get($url);
-            
+
             if($curl->responseCode == 200){
                 $regular = Helper::dealUrlId($host->chapter_regular, $book->book_id);
                 $chapters =$this->collectLinks($curl->response, $regular);
@@ -242,7 +241,7 @@ class BookController extends Controller{
         if(\Yii::$app->request->isAjax){
             $u = base64_decode(urldecode(\Yii::$app->request->get('u')));
             $b = intval(\Yii::$app->request->get('b'));
-            
+
             $domain_id = intval(\Yii::$app->request->get('doid'));
             $host = Domain::findOne($domain_id);
             if(!$host){
@@ -253,9 +252,10 @@ class BookController extends Controller{
             $host->domain = Helper::repairDomain($host->domain);
             
             $url = Helper::expandlinks($host->book_regular,$host->domain);
-            $url = Helper::dealUrlId($url, $b, $host->book_mark_id);
-            $url = Helper::expandlinks($u,$url);
-//             echo $url;exit;
+//            $url = Helper::dealUrlId($url, $b, $host->book_mark_id);
+//            echo $url;echo '||||||';
+//            echo $u;
+            $url = Helper::expandlinks($u,$host->domain);
             $curl = new Curl();
             //伪造IP
             $curl->setOption(CURLOPT_HTTPHEADER, Helper::getCurlIp());
@@ -284,7 +284,7 @@ class BookController extends Controller{
             
                 $paging_preg = Helper::dealRegular($host->paging_regular);
                 $chapter_all_regular = Helper::expandlinks($host->chapter_regular,$host->domain);
-                $chapter_regular = ($chapter_all_regular == $host->chapter_regular) ? $host->chapter_regular : $host->chapter_regular.'|'.$chapter_all_regular;
+                $chapter_regular = ($chapter_all_regular == $host->chapter_regular) ? $host->chapter_regular : $host->chapter_regular.'|'.$chapter_all_regular.'|$.html';
                 $chapter_regular = preg_replace('/<{bookid}>/i', '$', $chapter_regular);
                 $paging = $this->collectPaging($content, $paging_preg, $chapter_regular);
                 $pagingHtml = $this->pagingHtml($paging);

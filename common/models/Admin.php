@@ -96,7 +96,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function saveData(){
     	if($this->scenario == 'add'){
-    		$this->create_person = $this->update_person = \Yii::$app->user->id;
+//    		$this->create_person = $this->update_person = \Yii::$app->user->id;
     		$this->setPassword();
     		$this->setAuthKey();
     		$this->create_time = $this->update_time = date('Y-m-d H:i:s',time());
@@ -143,7 +143,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
     
     public function login(){
     	if ($this->validate()) {
-    		//print_r($this->getUser());exit;
+//    		print_r($this->getUser());exit;
     		return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
     	} else {
     		return false;
